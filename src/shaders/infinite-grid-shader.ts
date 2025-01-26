@@ -92,7 +92,7 @@ const fragmentShader = /* glsl*/ `
 
     bool writeDepth(float alpha) {
         vec2 uv = fract(gl_FragCoord.xy / 32.0);
-        float noise = texture2DLodEXT(blueNoiseTex32, uv, 0.0).y;
+        float noise = texture2DLod(blueNoiseTex32, uv, 0.0).y;
         return alpha > noise;
     }
 
@@ -126,7 +126,7 @@ const fragmentShader = /* glsl*/ `
 
         // 10m grid with colored main axes
         levelPos = pos * 0.1;
-        levelSize = 1.0 / 1000.0;
+        levelSize = 2.0 / 1000.0;
         levelAlpha = pristineGrid(levelPos, ddx * 0.1, ddy * 0.1, vec2(levelSize)) * fade;
         if (levelAlpha > epsilon) {
             vec3 color;
